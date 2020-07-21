@@ -5,13 +5,16 @@ import { useAppContext } from "../libs/context";
 import { useHistory } from "react-router-dom";
 import LoaderButton from "../components/LoaderButton";
 import { onError } from "../libs/error";
+import { useFormFields } from "../libs/hooks";
 
 import "./Login.scss";
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [{ email, password }, handleFieldChange] = useFormFields({
+    email: "",
+    password: "",
+  });
   const { userHasAuthenticated } = useAppContext();
   const history = useHistory();
 
@@ -42,14 +45,14 @@ export default function Login() {
             autoFocus
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleFieldChange}
           />
         </FormGroup>
         <FormGroup controlId="password" bsSize="large">
           <FormLabel>Password</FormLabel>
           <FormControl
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handleFieldChange}
             type="password"
           />
         </FormGroup>
