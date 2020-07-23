@@ -38,6 +38,7 @@ export default function Login() {
 
   return (
     <div className="Login">
+      <h1>Login</h1>
       <form onSubmit={handleSubmit}>
         <FormGroup controlId="email" bsSize="large">
           <FormLabel>Email</FormLabel>
