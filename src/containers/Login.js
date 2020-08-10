@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import { Auth } from "aws-amplify";
 import { useAppContext } from "../libs/context";
-import { useHistory } from "react-router-dom";
 import LoaderButton from "../components/LoaderButton";
 import { onError } from "../libs/error";
 import { useFormFields } from "../libs/hooks";
@@ -16,7 +15,6 @@ export default function Login() {
     password: "",
   });
   const { userHasAuthenticated } = useAppContext();
-  const history = useHistory();
 
   function validateForm() {
     return email.length > 0 && password.length > 0;
@@ -29,7 +27,6 @@ export default function Login() {
     try {
       await Auth.signIn(email, password);
       userHasAuthenticated(true);
-      history.push("/");
     } catch (e) {
       onError(e.message);
       setIsLoading(false);
